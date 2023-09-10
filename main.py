@@ -43,8 +43,14 @@ o = stu("a")
 
 o.say()
 
-x = [1, 2, 3, 4, 5]
-y = [2, 4, 6, 8, 10]
+x = [1, 2]
+y = [2, 4]
+
+a = np.array([x, y])
+
+a = a @ a
+print(a)
+
 
 plt.plot(x, y)
 plt.show()
@@ -53,6 +59,28 @@ plt.show()
 
 
 
+# 下面是几个plt的常用接口例子
 
+# 绘制折线图
+plt.plot([1, 2, 3, 4])
+plt.ylabel('some numbers')
+plt.show()
 
+# 绘制散点图
+plt.scatter(x, y)
+plt.show()
+
+# 绘制柱状图
+plt.bar([1, 2, 3, 4], [1, 4, 9, 16])
+plt.show()
+
+# 绘制直方图
+plt.hist([1, 2, 3, 4])
+plt.show()
+
+# 绘制饼图
+plt.pie([1, 2, 3, 4])
+# 标注各部分名称
+plt.legend(['foo', 'bar', 'baz', 'qux'])
+plt.show()
 

@@ -5,9 +5,6 @@ list2 = [1, 2, 3, 4, 5, 6, 7]
 # print ("list1[0]: ", list1[0])
 # print ("list2[1:5]: ", list2[1:5])
 
-
-
-
 # 元组，元素不可变
 top = (1, 2, 3)
 r2 = (4, 5)
@@ -49,15 +46,43 @@ print(dict1)
 
 
 
+# 武器类
+class Weapon:
+    def __init__(self, name, damage, price):
+        self.name = name
+        self.damage = damage
+        self.price = price
+
+    def __str__(self):
+        return "Weapon: %s, damage: %d, price: %d" % (self.name, self.damage, self.price)
+
+    def __repr__(self):
+        return self.__str__()
+
+# 枪类 继承自武器
+class Gun(Weapon):
+    def __init__(self, name, damage, price, bullet_type):
+        Weapon.__init__(self, name, damage, price)
+        self.bullet_type = bullet_type
+
+    def __str__(self) -> str:
+        return "Gun: %s, damage: %d, price: %d, bullet_type: %s" % (self.name, self.damage, self.price, self.bullet_type)
+
+    def __repr__(self):
+        return self.__str__()
 
 
 
+# 子弹类
+class Bullet(Weapon):
+    def __init__(self, name, damage, price, bullet_type):
+        Weapon.__init__(self, name, damage, price)
+        self.bullet_type = bullet_type
 
+    def __str__(self) -> str:
+        return "Bullet: %s, damage: %d, price: %d, bullet_type: %s" % (self.name, self.damage, self.price, self.bullet_type)
 
-
-
-
-
-
+    def __repr__(self):
+        return self.__str__()
 
 
