@@ -1,7 +1,7 @@
 import scipy.io as sio
 import numpy as np
 import matplotlib.pyplot as plt
-
+import matplotlib
 # 绘制 波长-吸光率 曲线图
 
 # step1 读取数据集
@@ -40,9 +40,37 @@ for i in range(0, 700):
     Y4.append(cornSpect[48][i])
     Y5.append(cornSpect[64][i])
 
+# 定义一个函数来对样本数据进行中心化，标准化和归一化
+def dataProcesssing(Y: [float]) -> [float]:
+    Y_mean = np.mean(Y)  # 求取均值
+    Y_std = np.std(Y)  # 求取标准差
+    Y_final = [(y - Y_mean) / Y_std for y in Y]  # 中心化和标准化
+    Y_normalized = normalize(Y_final)  # 归一化
+    return Y_normalized
+
+# 归一化
+def normalize(Y:[float]) -> [float]:
+    # 将输入列表转换成numpy数组格式
+    Y_arr = np.array(Y)
+    # 找到最大值和最小值
+    min = np.min(Y_arr)
+    max = np.max(Y_arr)
+    # 归一化
+    normalized = (Y_arr - min) / (max - min)
+    # 转换成列表形式
+    Y_normalized = normalized.tolist()
+    return Y_normalized
+
+# 对样本数据分别进行中心化
+Y1_final = dataProcesssing(Y1)
+Y2_final = dataProcesssing(Y2)
+Y3_final = dataProcesssing(Y3)
+Y4_final = dataProcesssing(Y4)
+Y5_final = dataProcesssing(Y5)
+
 # step3 数据可视化
 # 解决字体问题
-import matplotlib
+
 matplotlib.rc("font",family='DengXian')
 
 # 题图和坐标轴信息
@@ -65,6 +93,12 @@ plt.plot(X, Y2, label="样本17")
 plt.plot(X, Y3, label="样本33")
 plt.plot(X, Y4, label="样本49")
 plt.plot(X, Y5, label="样本65")
+
+plt.plot(X, Y1_final, label="样本1-预处理后")
+plt.plot(X, Y2_final, label="样本17-预处理后")
+plt.plot(X, Y3_final, label="样本33-预处理后")
+plt.plot(X, Y4_final, label="样本49-预处理后")
+plt.plot(X, Y5_final, label="样本65-预处理后")
 
 # 显示标签
 plt.legend()
